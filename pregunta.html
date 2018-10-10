@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="tipo_contenido" content="text/html" http-equiv="content-type" charset="utf-8">
+	<title>Preguntas</title>
+    <link rel='stylesheet' type='text/css' href='estilos/style.css' />
+	<link rel='stylesheet' 
+		   type='text/css' 
+		   media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+		   href='estilos/wide.css' />
+	<link rel='stylesheet' 
+		   type='text/css' 
+		   media='only screen and (max-width: 480px)'
+		   href='estilos/smartphone.css' />
+    <style>
+	   label{
+        display: inline-block;
+        width: 300px;
+        }
+        #divForm{
+            margin-top:80px;
+        }
+    </style>
+  </head>
+  <body>
+      
+      <div id="divForm" align="center">
+          <form id="fpreguntas" name="fpreguntas" method="post" action="../prueba.php">
+              <label>Introduzca su correo electrónico:*</label>
+              <input type="text" id="corr" name="mail">
+              <br><br>
+              
+              <label>Introduzca el enunciado de la pregunta:*</label>
+              <input type="text" id="enun" name="enun">
+              <br><br>
+              
+              <label>Respuesta correcta:*</label>
+              <input type="text" id="resp" name="resp">
+              <br><br>
+              
+              <label>Respuesta incorrecta 1:*</label>
+              <input type="text" id="inc1" name="inc1">
+              <br><br>
+              
+              <label>Respuesta incorrecta 2:*</label>
+              <input type="text" id="inc2" name="inc2">
+              <br><br>
+              
+              <label>Respuesta incorrecta 3:*</label>
+              <input type="text" id="inc3" name="inc3">
+              <br><br>
+              
+              <label>Complejidad (0-5):*</label>
+              <input type="number" id="comp" name="comp">
+              <br><br>
+              
+              <label>Tema de la pregunta:*</label>
+              <input type="text" id="tem" name="tem">
+              <br><br>
+              
+              <input type="submit" id="subm" name="subm" value="Enviar">
+          </form>
+        </div>
+        
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
+        <script>
+        
+               var validarMail = function(email){
+                   var CorreoExp = new RegExp(/^[a-z][a-z]+[0-9][0-9][0-9][\@ikasle\.ehu\.eus]$/);
+                   if (CorreoExp.test(email)==false){
+                       return false;
+                   }else{
+                       return true;
+                   }
+               }
+               
+               var validar = function(){
+                    var correo = $("#corr").val();
+                    var enunciado = $("#enun").val();
+                    var respuesta = $("#resp").val();
+                    var inc1 = $("#inc1").val();
+                    var inc2 = $("#inc2").val();
+                    var inc3 = $("#inc3").val();
+                    var complej = $("#comp").val();
+                    var tema = $("#tem").val();
+                    
+            
+                    if(correo.length==0 || enunciado.length==0 || respuesta.length==0 || inc1.length==0 || inc2.length==0 || inc3.length==0 || complej.length==0 || tema.length==0){
+                        alert("Los campos obligatorios no pueden estar vacíos")
+                        return false;
+                    }
+                    if(enunciado.length<10){
+                        alert("La pregunta debe tener al menos 10 carácteres")
+                        return false; //NO PUTO FUNCIONAAAAAA
+                    }
+                    if(validarMail("correo")==false){
+                         alert("El correo tiene que ser de la universidad")
+                       return false;
+                    }else{
+                      alert ("Bien")
+                    }
+                    if(complej<0 || complej>5){
+                        alert("La complejidad debe ser un valor entre 0 y 5")
+                        return false;
+                    }
+                    return true;
+                }
+                    
+                $("#subm").on("click", function (){
+                    validar();
+                });
+        </script>
+    </body>
+</html>
